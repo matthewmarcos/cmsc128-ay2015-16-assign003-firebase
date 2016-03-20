@@ -1,16 +1,19 @@
 'use strict'
-const
-    PORT = process.env.PORT || 5000,
-    _ = require('lodash'),
-    async = require('async'),
-    express = require('express'),
-    app = express(),
-    path = require('path');
+/*
+    Created by: Matthew Marcos
+    CMSC 128 Assignment 03
+*/
 
-app.use(express.static(path.join(__dirname, 'public')));
-app.set('views', path.join(__dirname, 'views'));
-// app.engine('html', require('ejs').renderFile);
-// app.set('view engine', 'html');
+const PORT         = process.env.PORT || 5000,
+      express      = require('express'),
+      async        = require('async'),
+      path         = require('path'),
+      _            = require('lodash'),
+      app          = express();
+
+app.use(express.static(path.join(__dirname, 'public/js')));
+app.use(express.static(path.join(__dirname, 'public/css')));
+app.use(express.static(path.join(__dirname, 'views')));
 
 app.get('/', function (req, res) {
     res.send('index');
