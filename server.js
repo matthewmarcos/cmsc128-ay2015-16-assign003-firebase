@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-    res.send('Notfound');
+    res.redirect('/');
 });
 
 app.listen(PORT, _ => {
