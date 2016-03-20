@@ -4,16 +4,18 @@
     CMSC 128 Assignment 03
 */
 
-const PORT         = process.env.PORT || 5000,
-      express      = require('express'),
-      async        = require('async'),
-      path         = require('path'),
-      _            = require('lodash'),
-      app          = express();
+const PORT         = process.env.PORT || 5000;
+const express      = require('express');
+const _            = require('lodash');
+const async        = require('async');
+const path         = require('path');
+const app          = express();
 
-app.use(express.static(path.join(__dirname, 'public/js')));
-app.use(express.static(path.join(__dirname, 'public/css')));
+// Joining folders for discovery
+app.use(express.static(path.join(__dirname, 'pulls/css')));
+app.use(express.static(path.join(__dirname, 'pulls/js')));
 app.use(express.static(path.join(__dirname, 'views')));
+app.use(express.static(path.join(__dirname, 'assets')));
 
 app.get('/', function (req, res) {
     res.send('index');
