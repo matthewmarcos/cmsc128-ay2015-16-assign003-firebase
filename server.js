@@ -14,13 +14,18 @@ const app          = express();
 // Joining folders for discovery
 app.use(express.static(path.join(__dirname, 'pulls/css')));
 app.use(express.static(path.join(__dirname, 'pulls/js')));
+app.use(express.static(path.join(__dirname, 'pulls')));
 app.use(express.static(path.join(__dirname, 'views')));
 app.use(express.static(path.join(__dirname, 'assets')));
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
     res.send('index');
 });
 
-app.listen(PORT, function () {
+app.get('*', (req, res) => {
+    res.send('Notfound');
+});
+
+app.listen(PORT, _ => {
     console.log('Listening on port ' + PORT);
 });
