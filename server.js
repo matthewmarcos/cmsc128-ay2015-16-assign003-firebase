@@ -1,31 +1,31 @@
 'use strict'
+/*
+    Created by: Matthew Marcos
+    CMSC 128 Assignment 03
+*/
 
-const http = require('http'),
-    fs = require('fs'),
-    PORT = process.env.PORT || 4500;
+const PORT         = process.env.PORT || 5000;
+const express      = require('express');
+const _            = require('lodash');
+const async        = require('async');
+const path         = require('path');
+const app          = express();
 
+// Joining folders for discovery
+app.use(express.static(path.join(__dirname, 'pulls/css')));
+app.use(express.static(path.join(__dirname, 'pulls/js')));
+app.use(express.static(path.join(__dirname, 'pulls')));
+app.use(express.static(path.join(__dirname, 'views')));
+app.use(express.static(path.join(__dirname, 'assets')));
 
-function start() {
-    let server,
-        indexHtml;
+app.get('/', (req, res) => {
+    res.send('index');
+});
 
-    fs.readFile('./public/index.html', (err, data) => {
-        if(err) {
-            throw err;
-        }
-        indexHtml = data;
-    })
+app.get('*', (req, res) => {
+    res.send('Notfound');
+});
 
-    server = http.createServer((req, res, next) => {
-        res.writeHeader(200, {'Content-Type': 'text/html'});
-        res.write(indexHtml);
-        res.end();
-   });
-
-    server.listen(PORT, _ => {
-        console.log('Listening at port ' + PORT);
-
-    });
-}
-
-start();
+app.listen(PORT, _ => {
+    console.log('Listening on port ' + PORT);
+});
