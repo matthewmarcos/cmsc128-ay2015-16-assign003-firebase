@@ -1,0 +1,19 @@
+{
+  "name": "firebase-marcos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/matthewmarcos94/cmsc128-ay2015-16-assign003-firebase.git"
+  },
+  "author": "Matthew Marcos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/matthewmarcos94/cmsc128-ay2015-16-assign003-firebase/issues"
+  },
+  "homepage": "https://gitlab.com/matthewmarcos94/cmsc128-ay2015-16-assign003-firebase#README"
+}
