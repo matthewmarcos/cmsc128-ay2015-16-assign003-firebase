@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://gitlab.com/matthewmarcos94/cmsc128-ay2015-16-assign003-firebase/issues"
   },
-  "homepage": "https://gitlab.com/matthewmarcos94/cmsc128-ay2015-16-assign003-firebase#README"
+  "homepage": "https://gitlab.com/matthewmarcos94/cmsc128-ay2015-16-assign003-firebase#README",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }

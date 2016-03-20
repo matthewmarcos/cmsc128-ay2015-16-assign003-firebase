@@ -1,31 +1,21 @@
 'use strict'
+const
+    PORT = process.env.PORT || 5000,
+    _ = require('lodash'),
+    async = require('async'),
+    express = require('express'),
+    app = express(),
+    path = require('path');
 
-const http = require('http'),
-    fs = require('fs'),
-    PORT = process.env.PORT || 4500;
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(__dirname, 'views'));
+// app.engine('html', require('ejs').renderFile);
+// app.set('view engine', 'html');
 
+app.get('/', function (req, res) {
+    res.send('index');
+});
 
-function start() {
-    let server,
-        indexHtml;
-
-    fs.readFile('./public/index.html', (err, data) => {
-        if(err) {
-            throw err;
-        }
-        indexHtml = data;
-    })
-
-    server = http.createServer((req, res, next) => {
-        res.writeHeader(200, {'Content-Type': 'text/html'});
-        res.write(indexHtml);
-        res.end();
-   });
-
-    server.listen(PORT, _ => {
-        console.log('Listening at port ' + PORT);
-
-    });
-}
-
-start();
+app.listen(PORT, function () {
+    console.log('Listening on port ' + PORT);
+});
