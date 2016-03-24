@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="bootstrap.min.css"> </head>
 <link rel="stylesheet" href="style.css">
 
-<body>
+<body class="noteData">
     <div class="container-fluid">
         <div class="row">
             <div id="wrapper">
                 <!-- Sidebar -->
-                <div id="sidebar-wrapper">
+                <div id="sidebar-wrapper" class="noteData">
                     <nav id="spy">
                         <ul class="sidebar-nav nav">
                             <li class="sidebar-brand">
@@ -22,21 +22,24 @@
                                     </span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#" data-scroll> <span class="fa fa-anchor solo">Note 1</span> </a>
+                            <li v-for="note in notes">
+                                <a href="#" data-scroll> <span class="fa fa-anchor solo">{{ note.title }}</span> </a>
                             </li>
+                            <!-- <li>
+                                <a href="#" data-scroll> <span class="fa fa-anchor solo">Note 1</span> </a>
+                            </li> -->
                         </ul>
                     </nav>
                 </div>
                 <!-- Page content -->
-                <div id="page-content-wrapper" class="noteDatum">
+                <div id="page-content-wrapper">
                     <div class="content-header">
                         <h1 id="home">
                             <a id="menu-toggle" href="#" class="glyphicon glyphicon-align-justify btn-menu toggle">
                                 <i class="fa fa-bars"></i>
                             </a>
                             <span>
-                                {{ title }}
+                                {{ newNote.title }}
                             </span>
                         </h1>
                     </div>
@@ -46,19 +49,19 @@
                                 <!-- Text input-->
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <input id="title" name="title" type="text" placeholder="Note Title" class="form-control input-md" v-model="title" required="">
+                                        <input id="title" name="title" type="text" placeholder="Note Title" class="form-control input-md" v-model="newNote.title" required="">
                                     </div>
                                 </div>
                                 <!-- Textarea -->
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <textarea class="form-control" v-model="text" rows="19" cols="80" id="text" name="text"></textarea>
+                                        <textarea class="form-control" v-model="newNote.text" rows="19" cols="80" id="text" name="text"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <button id="save" name="save" class="btn btn-success">Save</button>
-                                        <button id="delete" name="delete" class="btn btn-danger">Delete</button>
+                                        <button id="save"  v-on:click="save" class="btn btn-success">Save</button>
+                                        <button id="delete" class="btn btn-danger">Delete</button>
                                     </div>
                                 </div>
                             </fieldset>

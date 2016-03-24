@@ -1,30 +1,28 @@
 'use strict';
 
-let noteDatum = {
-    el: '.noteDatum',
-    data: {
-        created: '',
-        title: 'Title Placeholder',
-        text: ''
-    }
-};
-
 let noteData = {
     el: '.noteData',
     data: {
+        newNote: {
+            created: '',
+            title: 'Title Placeholder',
+            text: ''
+        },
         notes: []
     },
     methods: {
-        addNote: function (note) {
-            if(note.title !== '') {
-                this.notes.push(note);
+        save: function(event) {
+            event.preventDefault();
+            // alert("save");
+            var note = {
+                title: this.newNote.title,
+                text: this.newNote.text,
+                created: new Date()
             }
-        },
-        removeNote: function (index) {
-            this.todos.splice(index, 1)
+            this.notes.push(note)
+            // console.log(note);
         }
     }
 };
 
-new Vue(noteDatum);
 new Vue(noteData);
