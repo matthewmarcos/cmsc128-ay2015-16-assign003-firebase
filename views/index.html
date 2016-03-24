@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Marcos Firebase</title>
     <link rel="stylesheet" href="bootstrap.min.css"> </head>
+    <link rel="stylesheet" href="bootstrap-theme.min.css">
 <link rel="stylesheet" href="style.css">
 
 <body class="noteData">
@@ -23,11 +24,8 @@
                                 </a>
                             </li>
                             <li v-for="note in notes">
-                                <a href="#" data-scroll> <span class="fa fa-anchor solo">{{ note.title }}</span> </a>
+                                <a href="#" v-on:click="editNote(note.id)" data-scroll> <span class="fa fa-anchor solo">{{ note.title }}</span> </a>
                             </li>
-                            <!-- <li>
-                                <a href="#" data-scroll> <span class="fa fa-anchor solo">Note 1</span> </a>
-                            </li> -->
                         </ul>
                     </nav>
                 </div>
@@ -39,7 +37,7 @@
                                 <i class="fa fa-bars"></i>
                             </a>
                             <span>
-                                {{ newNote.title }}
+                                {{ currentNote.title }}
                             </span>
                         </h1>
                     </div>
@@ -49,13 +47,13 @@
                                 <!-- Text input-->
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <input id="title" name="title" type="text" placeholder="Note Title" class="form-control input-md" v-model="newNote.title" required="">
+                                        <input id="title" name="title" type="text" placeholder="Note Title" class="form-control input-md" v-model="currentNote.title" required="">
                                     </div>
                                 </div>
                                 <!-- Textarea -->
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <textarea class="form-control" v-model="newNote.text" rows="19" cols="80" id="text" name="text" required></textarea>
+                                        <textarea class="form-control" v-model="currentNote.text" rows="19" cols="80" id="text" name="text" required></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -74,6 +72,7 @@
     <!-- @TODO Compile with webpack / browserify -->
     <script src="jquery.min.js"></script>
     <script src="vue.js"></script>
+    <script src="lodash.min.js"></script>
     <script src="bootstrap.min.js"></script>
     <script src="script.js"></script>
     <script src="vue-data.js"></script>
