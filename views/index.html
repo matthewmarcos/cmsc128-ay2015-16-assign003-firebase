@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Marcos Firebase</title>
     <link rel="stylesheet" href="bootstrap.min.css"> </head>
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 
 <body>
     <div class="container-fluid">
@@ -15,23 +15,21 @@
                 <div id="sidebar-wrapper">
                     <nav id="spy">
                         <ul class="sidebar-nav nav">
-                            <li class="sidebar-brand">
-                                <a href="#home"><span class="fa fa-home solo">Add Note</span></a>
+                            <li class="sidebar-brand"> <a href="#home"><span class="fa fa-home solo">Add Note</span></a> </li>
+                            <li>
+                                <a href="#" data-scroll> <span class="fa fa-anchor solo">Note 1</span> </a>
                             </li>
                             <li>
-                                <a href="#anch1" data-scroll> <span class="fa fa-anchor solo">Anchor 1</span> </a>
+                                <a href="#" data-scroll> <span class="fa fa-anchor solo">Note 2</span> </a>
                             </li>
                             <li>
-                                <a href="#anch2" data-scroll> <span class="fa fa-anchor solo">Anchor 2</span> </a>
+                                <a href="#" data-scroll> <span class="fa fa-anchor solo">Note 3</span> </a>
                             </li>
                             <li>
-                                <a href="#anch3" data-scroll> <span class="fa fa-anchor solo">Anchor 3</span> </a>
+                                <a href="#" data-scroll> <span class="fa fa-anchor solo">Note 4</span> </a>
                             </li>
                             <li>
-                                <a href="#anch4" data-scroll> <span class="fa fa-anchor solo">Anchor 4</span> </a>
-                            </li>
-                            <li>
-                                <a href="#anch1" data-scroll> <span class="fa fa-anchor solo">Anchor </span> </a>
+                                <a href="#" data-scroll> <span class="fa fa-anchor solo">Note 5</span> </a>
                             </li>
                         </ul>
                     </nav>
@@ -43,23 +41,42 @@
                         <a id="menu-toggle" href="#" class="glyphicon glyphicon-align-justify btn-menu toggle">
                             <i class="fa fa-bars"></i>
                         </a>
-                        Sidebar Navigation Template
+                        NOTE TITLE
                     </h1> </div>
-                    <div class="page-content inset" data-spy="scroll" data-target="#spy">
-
+                    <div class="page-content inset">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input id="title" name="title" type="text" placeholder="Note Title" class="form-control input-md" required="">
+                                    </div>
+                                </div>
+                                <!-- Textarea -->
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <textarea class="form-control" rows="19" cols="80" id="text" name="text"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <button id="save" name="save" class="btn btn-success">Save</button>
+                                        <button id="delete" name="delete" class="btn btn-danger">Delete</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
                 </div>
-
             </div>
-
         </div>
-</div>
-</div>
-
-<!-- @TODO Compile with webpack / browserify -->
-<script src="jquery.min.js"></script>
-<script src="vue.js"></script>
-<script src="bootstrap.min.js"></script>
-<script src="script.js"></script>
-<script src="vue-data.js"></script>
+    </div>
+    <!-- @TODO Compile with webpack / browserify -->
+    <script src="jquery.min.js"></script>
+    <script src="vue.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <script src="vue-data.js"></script>
 </body>
+
 </html>
