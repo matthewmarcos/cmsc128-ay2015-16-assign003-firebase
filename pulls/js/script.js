@@ -1,6 +1,28 @@
 'use strict';
 
-let noteData = {
+function getNextId(array) {
+
+    var tempId;
+
+    tempId = _.maxBy(array, function(o) {
+        return o.id;
+    });
+
+    if(typeof tempId === 'undefined') {
+        tempId = 0;
+    }
+    else {
+        tempId = ++tempId.id;
+    }
+    // console.log('Next Id:' + tempId);
+    return tempId;
+}
+
+function start() {
+    new Vue(noteData);
+}
+
+var noteData = {
     el: '.noteData',
     data: {
         notes: [],
@@ -10,19 +32,18 @@ let noteData = {
             title: '',
             text: '',
             finished: '',
-            status: ''
-        },
-        nextId: 0
+            status: 'new'
+        }
     },
     methods: {
-        save: function(event) {
-            event.preventDefault();
+        save: function() {
 
             var note = {
                 id: this.currentNote.id,
+                created: this.currentNote.created,
                 title: this.currentNote.title,
                 text: this.currentNote.text,
-                created: new Date()
+                finished: this.currentNote.finished
             }
 
             if(note.title === '') {
@@ -36,42 +57,50 @@ let noteData = {
             }
 
             if(this.currentNote.status === 'new') {
+                this.currentNote.id = this.getNextId(this.notes);
+                this.currentNote.created = new Date();
                 this.notes.push(note);
-                this.currentNote.status = 'edit';
             }
             else {
                 this.notes.$set(note.id, note);
             }
+
+            this.currentNote.id = '',
+            this.currentNote.created = '',
+            this.currentNote.title = '',
+            this.currentNote.text = '',
+            this.currentNote.finished = false,
+            this.currentNote.status = 'new'
+
         },
-        createNote: function() {
+        initializeNewNote: function() {
 
             // Clear the fields of current text buffers
-            this.currentNote.id = this.notes.length;
+            this.currentNote.id = this.getNextId(this.notes);
+            this.currentNote.created = '';
             this.currentNote.title = '';
             this.currentNote.text = '';
+            this.currentNote.finished = 'false';
             this.currentNote.status = 'new';
         },
         editNote: function(id) {
 
             var tempNote = _.find(this.notes, ['id', id]);
+
             tempNote.status = 'edit';
-            console.log('Editing id: ' + id);
+
             this.currentNote.id = tempNote.id;
+            this.currentNote.created = tempNote.created;
             this.currentNote.title = tempNote.title,
             this.currentNote.text = tempNote.text;
-        }
+            this.currentNote.finished = tempNote.finished;
+            this.currentNote.status = tempNote.status;
+        },
+        deleteNote: function(id) {
+            console.log('Deleting note' + id);
+        },
+        getNextId: getNextId
     }
 };
-
-function initValues() {
-    noteData.data.nextId = noteData.data.notes.length;
-    noteData.data.currentNote.id = noteData.data.nextId;
-    noteData.data.currentNote.status = 'new';
-}
-
-function start() {
-    new Vue(noteData);
-    initValues();
-}
 
 start();
