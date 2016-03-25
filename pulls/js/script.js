@@ -1,8 +1,22 @@
 'use strict';
 
+var fire = new Firebase('https://fbmarcos.firebaseio.com/');
+
 function start() {
-    var fire = new Firebase('https://fbmarcos.firebaseio.com/');
+
     var app = new Vue(noteData);
+
+    function update (snapshot) {
+        var item = snapshot.val()
+        app.notes = item;
+    }
+
+    function error(err) {
+        return console.error(err)
+    }
+
+    fire.on("value", update, error);
+    fire.on('child_added', update);
 }
 
 var noteData = {
@@ -60,6 +74,8 @@ var noteData = {
             this.currentNote.text = '';
             this.currentNote.finished = false;
             this.currentNote.status = 'new';
+
+            fire.set(this.notes);
         },
         initializeNewNote: function() {
 
