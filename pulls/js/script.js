@@ -8,7 +8,8 @@ function start() {
 
     function update (snapshot) {
         var item = snapshot.val()
-        app.notes = item;
+
+        app.notes = (item === null)?[]:item;
     }
 
     function error(err) {
@@ -102,7 +103,9 @@ var noteData = {
                 this.notes.$remove(tempNote);
             }
 
+            fire.set(this.notes);
             this.initializeNewNote();
+
             return true;
         },
         getNextId: function () {
