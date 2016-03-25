@@ -17,14 +17,14 @@
                     <nav id="spy">
                         <ul class="sidebar-nav nav">
                             <li class="sidebar-brand">
-                                <a href="#home" v-on:click="initializeNewNote()">
+                                <a href="#home" v-on:click.stop.prevent="initializeNewNote()">
                                     <span class="fa fa-home solo">Add Note
                                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                     </span>
                                 </a>
                             </li>
                             <li v-for="note in notes" track-by="$index">
-                                <a href="#" v-on:click="editNote(note.id)" data-scroll> <span class="fa fa-anchor solo center">{{ note.title }}</span> </a>
+                                <a href="#" v-on:click.stop.prevent="editNote(note.id)" data-scroll> <span class="fa fa-anchor solo center">{{ note.id }}: {{ note.title }}</span> </a>
                             </li>
                         </ul>
                     </nav>

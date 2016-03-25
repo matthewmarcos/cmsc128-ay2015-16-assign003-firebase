@@ -1,23 +1,5 @@
 'use strict';
 
-function getNextId(array) {
-
-    var tempId;
-
-    tempId = _.maxBy(array, function(o) {
-        return o.id;
-    });
-
-    if(typeof tempId === 'undefined') {
-        tempId = 0;
-    }
-    else {
-        tempId = ++tempId.id;
-    }
-    // console.log('Next Id:' + tempId);
-    return tempId;
-}
-
 function start() {
     new Vue(noteData);
 }
@@ -57,12 +39,22 @@ var noteData = {
             }
 
             if(this.currentNote.status === 'new') {
-                this.currentNote.id = this.getNextId(this.notes);
-                this.currentNote.created = new Date();
+                note.id = this.getNextId();
+                note.created = new Date();
+
+                console.log('Saving:');
+                console.log(note);
                 this.notes.push(note);
             }
             else {
-                this.notes.$set(note.id, note);
+                var index = _.findIndex(this.notes, function(o) {
+                    return o.id = note.id;
+                });
+
+                console.log('Editing:');
+                console.log(note);
+
+                this.notes.$set(index, note);
             }
 
             this.currentNote.id = '',
@@ -84,10 +76,14 @@ var noteData = {
             this.currentNote.status = 'new';
         },
         editNote: function(id) {
-
+            console.log('ID clicked for edit: ' + id);
             var tempNote = _.find(this.notes, ['id', id]);
 
             tempNote.status = 'edit';
+
+            console.log('Editing Note:');
+            console.log('id:' + tempNote.id);
+            console.log(tempNote);
 
             this.currentNote.id = tempNote.id;
             this.currentNote.created = tempNote.created;
@@ -97,9 +93,42 @@ var noteData = {
             this.currentNote.status = tempNote.status;
         },
         deleteNote: function(id) {
-            console.log('Deleting note' + id);
+
+            var tempNoteList = this.notes;
+
+            if(this.currentNote.status === 'new') {
+                this.initializeNewNote();
+                return false;
+            }
+
+            // console.log('Deleting note' + id);
+
+            _.remove(tempNoteList, function(note) {
+                return note.id === id;
+            });
+
+            this.notes = tempNoteList;
+            this.initializeNewNote();
+
+            return true;
         },
-        getNextId: getNextId
+        getNextId: function () {
+        // Gets tne next id, given the initial array
+            var tempId;
+
+            tempId = _.maxBy(this.notes, function(o) {
+                return o.id;
+            });
+
+            if(typeof tempId === 'undefined') {
+                tempId = 0;
+            }
+            else {
+                tempId = ++tempId.id;
+            }
+
+            return tempId;
+        }
     }
 };
 
