@@ -43,28 +43,29 @@ let noteData = {
         createNote: function() {
             // Clear the fields of current text buffers
             this.currentNote.id = this.notes.length;
-            this.currentNote.title = '',
-            this.currentNote.text = '',
-            this.currentNote.status = 'new'
+            this.currentNote.title = '';
+            this.currentNote.text = '';
+            this.currentNote.status = 'new';
         },
-        editNote: function(_id) {
-            // var tempNote = _.find(this.notes, [id, id]);
-            // tempNote.status = 'edit';
-            console.log('Editing id: ' + _id);
-            // console.log('Editing note');
+        editNote: function(id) {
+            var tempNote = _.find(this.notes, ['id', id]);
+            tempNote.status = 'edit';
+            console.log('Editing id: ' + id);
+            this.currentNote.id = tempNote.id;
+            this.currentNote.title = tempNote.title,
+            this.currentNote.text = tempNote.text;
         }
     }
 };
 
-function updateValues() {
+function initValues() {
     noteData.data.currentNote.id = noteData.data.notes.length;
     noteData.data.currentNote.status = 'new';
 }
 
 function start() {
     new Vue(noteData);
-    updateValues();
-    _.each(['asc', 'asc'], (asc) => { return; });
+    initValues();
 }
 
 start();
