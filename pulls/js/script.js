@@ -20,6 +20,8 @@ var noteData = {
     methods: {
         save: function() {
 
+            // console.log('save to notes:');
+            // console.log(this.notes);
             var note = {
                 id: this.currentNote.id,
                 created: this.currentNote.created,
@@ -28,6 +30,8 @@ var noteData = {
                 finished: this.currentNote.finished
             }
 
+            // console.log('logging note:');
+            // console.log(note);
             if(note.title === '') {
                 alert('Add a note title!');
                 return false;
@@ -39,30 +43,32 @@ var noteData = {
             }
 
             if(this.currentNote.status === 'new') {
+                console.log('Logging note ids 1');
+                this.notes.forEach(function(notee) {
+                    console.log(notee.title + ': ' + notee.id);
+                });
+
+
                 note.id = this.getNextId();
                 note.created = new Date();
 
-                console.log('Saving:');
-                console.log(note);
                 this.notes.push(note);
+
             }
             else {
                 var index = _.findIndex(this.notes, function(o) {
                     return o.id = note.id;
                 });
 
-                console.log('Editing:');
-                console.log(note);
-
                 this.notes.$set(index, note);
             }
 
-            this.currentNote.id = '',
-            this.currentNote.created = '',
-            this.currentNote.title = '',
-            this.currentNote.text = '',
-            this.currentNote.finished = false,
-            this.currentNote.status = 'new'
+            this.currentNote.id = '';
+            this.currentNote.created = '';
+            this.currentNote.title = '';
+            this.currentNote.text = '';
+            this.currentNote.finished = false;
+            this.currentNote.status = 'new';
 
         },
         initializeNewNote: function() {
@@ -76,14 +82,10 @@ var noteData = {
             this.currentNote.status = 'new';
         },
         editNote: function(id) {
-            console.log('ID clicked for edit: ' + id);
+
             var tempNote = _.find(this.notes, ['id', id]);
 
             tempNote.status = 'edit';
-
-            console.log('Editing Note:');
-            console.log('id:' + tempNote.id);
-            console.log(tempNote);
 
             this.currentNote.id = tempNote.id;
             this.currentNote.created = tempNote.created;
@@ -101,8 +103,6 @@ var noteData = {
                 return false;
             }
 
-            // console.log('Deleting note' + id);
-
             _.remove(tempNoteList, function(note) {
                 return note.id === id;
             });
@@ -114,20 +114,17 @@ var noteData = {
         },
         getNextId: function () {
         // Gets tne next id, given the initial array
-            var tempId;
-
-            tempId = _.maxBy(this.notes, function(o) {
-                return o.id;
-            });
+            var tempNotes = this.notes,
+                tempId = _.maxBy(tempNotes, function(o) {
+                    return o.id;
+                });
 
             if(typeof tempId === 'undefined') {
-                tempId = 0;
+                return 0;
             }
             else {
-                tempId = ++tempId.id;
+                return tempId.id + 1;
             }
-
-            return tempId;
         }
     }
 };
