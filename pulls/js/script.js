@@ -19,7 +19,6 @@ var noteData = {
     },
     methods: {
         save: function() {
-
             var note = {
                 id: this.currentNote.id,
                 created: this.currentNote.created,

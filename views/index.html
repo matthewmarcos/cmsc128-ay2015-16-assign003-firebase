@@ -25,9 +25,13 @@
                             </li>
                             <li v-for="note in notes" track-by="$index">
                                 <a href="#" v-on:click.stop.prevent="editNote(note.id)">
-                                    <span v-if="note.finished" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                    <span v-if="!note.finished" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    <span>{{ note.title }}</span>
+                                    <!-- <span v-if="note.finished">
+                                        D
+                                    </span>
+                                    <span v-if="!note.finished">
+                                        ND
+                                    </span> -->
+                                    <span v-bind:class="note.finished?'fin':'nope'">{{ note.title }}</span>
                                 </a>
                                 <!-- class="center" -->
                             </li>
@@ -55,8 +59,20 @@
                             <fieldset>
                                 <!-- Text input-->
                                 <div class="form-group">
-                                    <div class="col-md-12">
+                                    <div class="col-md-9">
                                         <input id="title" name="title" type="text" placeholder="Note Title" class="form-control input-md" v-model="currentNote.title" required="">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <h4>Finished?</h4>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="onoffswitch">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" v-model="currentNote.finished">
+                                            <label class="onoffswitch-label" for="myonoffswitch">
+                                                <span class="onoffswitch-inner"></span>
+                                                <span class="onoffswitch-switch"></span>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- Textarea -->
@@ -66,7 +82,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-md-12">
+                                    <div class="col-md-8">
                                         <button id="save"  v-on:click.stop.prevent="save" class="btn btn-success">Save</button>
                                         <button id="delete" v-on:click.stop.prevent="deleteNote(currentNote.id)"class="btn btn-danger">Delete</button>
                                     </div>
