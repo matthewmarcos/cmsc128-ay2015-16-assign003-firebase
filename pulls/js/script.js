@@ -37,7 +37,7 @@ let noteData = {
                 this.currentNote.status = 'edit';
             }
             else {
-                this.notes[note.id] = note;
+                this.notes.$set(note.id, note);
             }
         },
         createNote: function() {
