@@ -16,8 +16,11 @@ function start() {
         return console.error(err)
     }
 
-    fire.on("value", update, error);
+    fire.on('value', update, error);
     fire.on('child_added', update);
+    fire.on('child_changed', update);
+    fire.on('child_removed', update);
+
 }
 
 var noteData = {
