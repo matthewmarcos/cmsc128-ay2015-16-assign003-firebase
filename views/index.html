@@ -13,7 +13,7 @@
         <div class="row">
             <div id="wrapper">
                 <!-- Sidebar -->
-                <div id="sidebar-wrapper" class="noteData">
+                <div id="sidebar-wrapper">
                     <nav id="spy">
                         <ul class="sidebar-nav nav">
                             <li class="sidebar-brand">
@@ -24,7 +24,8 @@
                                 </a>
                             </li>
                             <li v-for="note in notes" track-by="$index">
-                                <a href="#" v-on:click.stop.prevent="editNote(note.id)" data-scroll> <span class="fa fa-anchor solo center">{{ note.id }}: {{ note.title }}</span> </a>
+                                <a href="#" v-on:click.stop.prevent="editNote(note.id)" data-scroll> <span class="center">{{ note.title }}</span> </a>
+                                <!-- fa fa-anchor solo -->
                             </li>
                         </ul>
                     </nav>

@@ -48,7 +48,7 @@ var noteData = {
             }
             else {
                 var index = _.findIndex(this.notes, function(o) {
-                    return o.id = note.id;
+                    return o.id === note.id;
                 });
 
                 this.notes.$set(index, note);
@@ -60,7 +60,6 @@ var noteData = {
             this.currentNote.text = '';
             this.currentNote.finished = false;
             this.currentNote.status = 'new';
-
         },
         initializeNewNote: function() {
 
@@ -74,22 +73,15 @@ var noteData = {
         },
         editNote: function(id) {
 
-            var tempNote = _.find(this.notes, ['id', id]);
-
-            tempNote.status = 'edit';
-
-            this.currentNote.id = tempNote.id;
-            this.currentNote.created = tempNote.created;
-            this.currentNote.title = tempNote.title,
-            this.currentNote.text = tempNote.text;
-            this.currentNote.finished = tempNote.finished;
-            this.currentNote.status = tempNote.status;
+            var tempNote =  _.find(this.notes, function(o) { return o.id === id; });
+            _.assign(this.currentNote, tempNote);
+            this.currentNote.status = 'edit';
         },
         deleteNote: function(id) {
 
             if(this.currentNote.status === 'edit') {
-                var note = _.find(this.notes, function(o) { return o.id === id; });
-                this.notes.$remove(note);
+                var tempNote = _.find(this.notes, function(o) { return o.id === id; });
+                this.notes.$remove(tempNote);
             }
 
             this.initializeNewNote();
