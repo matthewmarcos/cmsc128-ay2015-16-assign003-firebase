@@ -20,8 +20,6 @@ var noteData = {
     methods: {
         save: function() {
 
-            // console.log('save to notes:');
-            // console.log(this.notes);
             var note = {
                 id: this.currentNote.id,
                 created: this.currentNote.created,
@@ -30,8 +28,6 @@ var noteData = {
                 finished: this.currentNote.finished
             }
 
-            // console.log('logging note:');
-            // console.log(note);
             if(note.title === '') {
                 alert('Add a note title!');
                 return false;
@@ -43,11 +39,6 @@ var noteData = {
             }
 
             if(this.currentNote.status === 'new') {
-                console.log('Logging note ids 1');
-                this.notes.forEach(function(notee) {
-                    console.log(notee.title + ': ' + notee.id);
-                });
-
 
                 note.id = this.getNextId();
                 note.created = new Date();
@@ -96,20 +87,12 @@ var noteData = {
         },
         deleteNote: function(id) {
 
-            var tempNoteList = this.notes;
-
-            if(this.currentNote.status === 'new') {
-                this.initializeNewNote();
-                return false;
+            if(this.currentNote.status === 'edit') {
+                var note = _.find(this.notes, function(o) { return o.id === id; });
+                this.notes.$remove(note);
             }
 
-            _.remove(tempNoteList, function(note) {
-                return note.id === id;
-            });
-
-            this.notes = tempNoteList;
             this.initializeNewNote();
-
             return true;
         },
         getNextId: function () {
