@@ -24,8 +24,12 @@
                                 </a>
                             </li>
                             <li v-for="note in notes" track-by="$index">
-                                <a href="#" v-on:click.stop.prevent="editNote(note.id)" data-scroll> <span class="center">{{ note.title }}</span> </a>
-                                <!-- fa fa-anchor solo -->
+                                <a href="#" v-on:click.stop.prevent="editNote(note.id)">
+                                    <span v-if="note.finished" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                    <span v-if="!note.finished" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    <span>{{ note.title }}</span>
+                                </a>
+                                <!-- class="center" -->
                             </li>
                         </ul>
                     </nav>

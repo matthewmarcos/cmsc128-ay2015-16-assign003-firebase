@@ -13,7 +13,7 @@ var noteData = {
             created: '',
             title: '',
             text: '',
-            finished: '',
+            finished: false,
             status: 'new'
         }
     },
