@@ -64,12 +64,14 @@ var noteData = {
         initializeNewNote: function() {
 
             // Clear the fields of current text buffers
-            this.currentNote.id = this.getNextId(this.notes);
-            this.currentNote.created = '';
-            this.currentNote.title = '';
-            this.currentNote.text = '';
-            this.currentNote.finished = 'false';
-            this.currentNote.status = 'new';
+            _.assign(this.currentNote, {
+                id: this.getNextId(this.notes),
+                created: '',
+                title: '',
+                text: '',
+                finished: false,
+                status: 'new'
+            });
         },
         editNote: function(id) {
 
