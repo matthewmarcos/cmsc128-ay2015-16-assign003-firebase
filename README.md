@@ -9,3 +9,7 @@ A user can create notes and has the ability to select whether or not they are co
         npm install
 * Start the server
         npm start
+
+Technologies used:
+1. Vuejs
+1. Bootstrap 3
