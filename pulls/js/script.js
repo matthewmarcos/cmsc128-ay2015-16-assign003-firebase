@@ -1,7 +1,8 @@
 'use strict';
 
 function start() {
-    new Vue(noteData);
+    var fire = new Firebase('https://fbmarcos.firebaseio.com/');
+    var app = new Vue(noteData);
 }
 
 var noteData = {
@@ -73,13 +74,13 @@ var noteData = {
             });
         },
         editNote: function(id) {
-
+        // Prepares currentNote for editing
             var tempNote =  _.find(this.notes, function(o) { return o.id === id; });
             _.assign(this.currentNote, tempNote);
             this.currentNote.status = 'edit';
         },
         deleteNote: function(id) {
-
+        // Deletes the note from notes with id passed to this function
             if(this.currentNote.status === 'edit') {
                 var tempNote = _.find(this.notes, function(o) { return o.id === id; });
                 this.notes.$remove(tempNote);
@@ -91,9 +92,7 @@ var noteData = {
         getNextId: function () {
         // Gets tne next id, given the initial array
             var tempNotes = this.notes,
-                tempId = _.maxBy(tempNotes, function(o) {
-                    return o.id;
-                });
+                tempId = _.maxBy(tempNotes, function(o) { return o.id; });
 
             if(typeof tempId === 'undefined') {
                 return 0;
