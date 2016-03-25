@@ -42,6 +42,10 @@
                         </h1>
                     </div>
                     <div class="page-content inset">
+                        <span class="status" v-bind:class="currentNote.status">
+                            <div v-if="currentNote.status === 'edit'">Editing</div>
+                            <div v-if="currentNote.status === 'new'">New Note</div>
+                        </span>
                         <form class="form-horizontal">
                             <fieldset>
                                 <!-- Text input-->
@@ -59,7 +63,7 @@
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <button id="save"  v-on:click="save" class="btn btn-success">Save</button>
-                                        <button id="delete" class="btn btn-danger">Delete</button>
+                                        <button id="delete" v-on:click="deleteNote()"class="btn btn-danger">Delete</button>
                                     </div>
                                 </div>
                             </fieldset>

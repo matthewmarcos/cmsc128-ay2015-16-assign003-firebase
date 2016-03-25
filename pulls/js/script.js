@@ -8,8 +8,11 @@ let noteData = {
             id: '',
             created: '',
             title: '',
-            text: ''
-        }
+            text: '',
+            finished: '',
+            status: ''
+        },
+        nextId: 0
     },
     methods: {
         save: function(event) {
@@ -41,6 +44,7 @@ let noteData = {
             }
         },
         createNote: function() {
+
             // Clear the fields of current text buffers
             this.currentNote.id = this.notes.length;
             this.currentNote.title = '';
@@ -48,6 +52,7 @@ let noteData = {
             this.currentNote.status = 'new';
         },
         editNote: function(id) {
+
             var tempNote = _.find(this.notes, ['id', id]);
             tempNote.status = 'edit';
             console.log('Editing id: ' + id);
@@ -59,7 +64,8 @@ let noteData = {
 };
 
 function initValues() {
-    noteData.data.currentNote.id = noteData.data.notes.length;
+    noteData.data.nextId = noteData.data.notes.length;
+    noteData.data.currentNote.id = noteData.data.nextId;
     noteData.data.currentNote.status = 'new';
 }
 

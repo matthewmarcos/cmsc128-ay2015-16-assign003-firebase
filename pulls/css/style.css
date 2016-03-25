@@ -106,6 +106,15 @@
     padding: 20px;
 }
 
+.new {
+    color: #009900;
+}
+
+.edit {
+    color: #aa9900;
+}
+
+
 @media (max-width:767px) {
     #wrapper {
         padding-left: 0;
