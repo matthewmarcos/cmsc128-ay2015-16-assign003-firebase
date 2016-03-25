@@ -2,7 +2,7 @@
 
 This is a notebook type application. A user can add notes, which contain text and a title.
 
-A user can create notes and has the ability to select whether or not they are completed or not. The data gets loaded asynchronously across the data servers.
+A user can create notes and has the ability to select whether or not they are completed or not. The data gets loaded asynchronously with firebase.
 
 ### Setting up
 1. Ensure that you have the following installed
